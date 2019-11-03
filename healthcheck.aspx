@@ -44,7 +44,7 @@
         <div class="auto-style4">
             <span class="auto-style2">
             <br />
-            </span><span class="auto-style6"><strong>Opsgility Traffic Manager Web App</strong></span><span class="auto-style1"><br class="auto-style7" />
+            </span><span class="auto-style6"><strong> Traffic Manager Web App</strong></span><span class="auto-style1"><br class="auto-style7" />
             </span><span class="auto-style8">Health Check Page</span><br class="auto-style1" />
             <br />
             <br class="auto-style1" />
@@ -66,7 +66,7 @@
             <br />
             <br />
             <br />
-            <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/opsgility-logo.png" />
+            <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/007FFFLearning-logo.png" />
         </div>
     </form>
 </body>
