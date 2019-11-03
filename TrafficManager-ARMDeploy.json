@@ -10,7 +10,7 @@
     "webAppLocations": [ "West US", "West Europe", "East Asia" ],
     "webAppLocationSuffix": [ "WestUS", "WestEurope", "EastAsia" ],
     "appSvcPlanNamePrefix": "TMLabAppSvcPlan",
-    "repoURL": "https://github.com/007FFFLearning/ARM-demos/tree/master/TrafficMgr",
+    "repoURL": "https://github.com/pdtit/TrafficMgr",
     "branch": "master"
   },
 
