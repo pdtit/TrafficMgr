@@ -1,0 +1,62 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json",
+  "contentVersion": "1.0.0.0",
+
+  "parameters": {
+  },
+
+  "variables": {
+    "webAppNamePrefix": "[concat('TMLabWebApp-', take(uniqueString(resourceGroup().id, subscription().subscriptionId),3), '-')]",
+    "webAppLocations": [ "West US", "West Europe", "East Asia" ],
+    "webAppLocationSuffix": [ "WestUS", "WestEurope", "EastAsia" ],
+    "appSvcPlanNamePrefix": "TMLabAppSvcPlan",
+    "repoURL": "https://github.com/007FFFLearning/ARM-demos/tree/master/TrafficMgr",
+    "branch": "master"
+  },
+
+  "resources": [
+    {
+      "apiVersion": "2015-08-01",
+      "name": "[concat(variables('appSvcPlanNamePrefix'), '-', variables('webAppLocationSuffix')[copyIndex()])]",
+      "type": "Microsoft.Web/serverfarms",
+      "copy": {
+        "name": "farmloop",
+        "count": "[length(variables('webAppLocations'))]"
+      },
+      "location": "[variables('webAppLocations')[copyIndex()]]",
+      "sku": {
+        "name": "S1",
+        "tier": "Standard"
+      }
+    },
+    {
+      "apiVersion": "2015-08-01",
+      "name": "[concat(variables('webAppNamePrefix'), variables('webAppLocationSuffix')[copyIndex()])]",
+      "type": "Microsoft.Web/sites",
+      "copy": {
+        "name": "siteloop",
+        "count": "[length(variables('webAppLocations'))]"
+      },
+      "location": "[variables('webAppLocations')[copyIndex()]]",
+      "dependsOn": [ "[resourceId('Microsoft.Web/serverfarms', concat(variables('appSvcPlanNamePrefix'), '-', variables('webAppLocationSuffix')[copyIndex()]))]" ],
+      "properties": {
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', concat(variables('appSvcPlanNamePrefix'), '-', variables('webAppLocationSuffix')[copyIndex()]))]"
+      },
+      "resources": [
+        {
+          "apiVersion": "2015-08-01",
+          "name": "web",
+          "type": "sourcecontrols",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/Sites', concat(variables('webAppNamePrefix'), variables('webAppLocationSuffix')[copyIndex()]))]"
+          ],
+          "properties": {
+            "RepoUrl": "[variables('repoURL')]",
+            "branch": "[variables('branch')]",
+            "IsManualIntegration": true
+          }
+        }
+      ]
+    }
+  ]
+}
