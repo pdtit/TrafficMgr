@@ -22,7 +22,7 @@
 <body style="background-color: #FFFFFF">
     <form id="form1" runat="server">
         <p class="auto-style1" style="margin-left: 20px; margin-top: 40px">
-            Welcome to the Opsgility Traffic Manager Web App</p>
+            Welcome to the Traffic Manager Web App</p>
         <p class="auto-style2" style="margin-left: 20px; margin-top: 40px">
             &nbsp;<asp:Label ID="Label1" runat="server" Text="Label" OnPreRender="Label1_PreRender" style="font-size: x-large"></asp:Label>
         </p>
